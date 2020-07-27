@@ -5,6 +5,8 @@
 #
 class varnish::params {
 
+  notify {"varnish-params: ${operatingsystemmajrelease} ${operatingsystem}": }
+
   case $::osfamily {
     'RedHat': {
 
@@ -41,7 +43,7 @@ class varnish::params {
 
     'Debian': {
       case "${::operatingsystem}${::operatingsystemmajrelease}" {
-        "Debian10": {
+        'Debian10': {
           $vcl_reload = $::varnish::version_major ? {
             '6' => '/usr/share/varnish/varnishreload',
             '5' => '/usr/share/varnish/reload-vcl -q',
